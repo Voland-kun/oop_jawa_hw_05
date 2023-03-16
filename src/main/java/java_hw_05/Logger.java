@@ -8,7 +8,7 @@ public class Logger {
     public static void logging(String text) {
         LocalDateTime dateTime = LocalDateTime.now();
         try (FileWriter fileWriter = new FileWriter("log.csv", true)) {
-            fileWriter.append(dateTime + text);
+            fileWriter.append(dateTime + "   " + text);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
