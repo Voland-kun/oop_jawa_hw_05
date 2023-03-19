@@ -37,11 +37,16 @@ public class PresenterRational extends ParentPresenter<RationalCalc, Rational>{
                 Logger.logging(a + "*" + b + "=" + result + "\n");
                 break;
             case "/":
-                result = (model.division());
-                view.print(result, "Результат: ");
-                Logger.logging(a + "/" + b + "=" + result + "\n");
-                break;
+                    if (b.getNumerator() != 0) {
+                        result = (model.division());
+                        view.print(result, "Результат: ");
+                        Logger.logging(a + "/" + b + "=" + result + "\n");
+                        break;
+                    } else System.out.println("Деление на 0");
+                    Logger.logging("Деление на 0.\n");
+                }
         }
-    }
 }
+
+
 

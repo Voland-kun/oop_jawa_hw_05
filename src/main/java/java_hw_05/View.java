@@ -5,9 +5,23 @@ import java.util.Scanner;
 public class View<T extends Numbers>{
     Scanner userInput = new Scanner(System.in);
 
-    public int getValueInt(String title) {
+    public int getValueInt(String title, int flag) {
         System.out.printf("%s", title);
-        return userInput.nextInt();
+        while (true) {
+            try {
+                int userNumb = Integer.parseInt(userInput.next());
+                if (flag == 2) {
+                    if (userNumb != 0) {
+                        return userNumb;
+                    } else {
+                        System.out.println("Введите корректное значение.");
+                    }
+                } else {return userNumb;}
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Введите корректное значение.");
+            }
+        }
     }
 
     public Complex getValueComplex(String title) {
@@ -17,12 +31,19 @@ public class View<T extends Numbers>{
 
     public Rational getValueRational(String title) {
         System.out.printf("%s\n", title);
-        return new Rational(getValueInt("Введите числитель: "),getValueInt("Введите знаменатель: "));
+        return new Rational(getValueInt("Введите числитель: ", 1),getValueInt("Введите знаменатель: ", 2));
     }
 
     public double getValueDouble(String title) {
         System.out.printf("%s", title);
-        return userInput.nextDouble();
+        while (true) {
+            try {
+                double userNumb = Double.parseDouble(userInput.next());
+                return userNumb;
+            } catch (NumberFormatException e) {
+                System.out.println("Введите корректное значение.");
+            }
+        }
     }
 
     public void print(T data, String title) {
@@ -58,7 +79,6 @@ public class View<T extends Numbers>{
             switch (userChoice) {
                 case "+", "/", "*", "-":
                     return userChoice;
-
                 default:
                     System.out.println("Введите корректный знак");
             }
